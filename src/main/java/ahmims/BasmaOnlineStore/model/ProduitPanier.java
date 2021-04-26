@@ -1,4 +1,5 @@
 package ahmims.BasmaOnlineStore.model;
+
 import org.hibernate.annotations.GenericGenerator;
 import util.PkGenerator;
 
@@ -12,6 +13,8 @@ public class ProduitPanier {
     @GenericGenerator(name = PkGenerator.rndmString, strategy = "util.PkGenerator")
     @Column(name = "idProduitPanier")
     private String idProduitPanier;
+    @Column(name = "countProduit")
+    private int countProduit;
     @ManyToOne
     @JoinColumn(name = "idProduit")
     private Produit produit;
@@ -22,7 +25,15 @@ public class ProduitPanier {
     //
     //
 
-    public ProduitPanier(Produit produit, Panier panier) {
+    public ProduitPanier(String idProduitPanier, int countProduit, Produit produit, Panier panier) {
+        this.idProduitPanier = idProduitPanier;
+        this.countProduit = countProduit;
+        this.produit = produit;
+        this.panier = panier;
+    }
+
+    public ProduitPanier(int countProduit, Produit produit, Panier panier) {
+        this.countProduit = countProduit;
         this.produit = produit;
         this.panier = panier;
     }
@@ -31,6 +42,23 @@ public class ProduitPanier {
     }
     //
     //
+
+
+    public String getIdProduitPanier() {
+        return idProduitPanier;
+    }
+
+    public void setIdProduitPanier(String idProduitPanier) {
+        this.idProduitPanier = idProduitPanier;
+    }
+
+    public int getCountProduit() {
+        return countProduit;
+    }
+
+    public void setCountProduit(int countProduitPanier) {
+        this.countProduit = countProduitPanier;
+    }
 
     public Produit getProduit() {
         return produit;

@@ -15,11 +15,6 @@ public class Client extends Utilisateur {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "idAuthentification", referencedColumnName = "EXTERNAL_ID")
     private Authentification authentification;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idFavori")
-    private Favori favori;
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Coupon> coupons;
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Panier> paniers;
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -28,21 +23,18 @@ public class Client extends Utilisateur {
     //
     //
 
-    public Client(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role, String imgClient, Authentification authentification, Favori favori, List<Coupon> coupons, List<Panier> paniers, List<Adresse> adresses) {
+    public Client(String idUtilisateur, String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, int statutUtilisateur, Role role, String imgClient, Authentification authentification, List<Panier> paniers, List<Adresse> adresses) {
         super(idUtilisateur, nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, statutUtilisateur, role);
         this.imgClient = imgClient;
         this.authentification = authentification;
-        this.favori = favori;
-        this.coupons = coupons;
         this.paniers = paniers;
         this.adresses = adresses;
     }
 
-    public Client(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, String imgClient, Authentification authentification, Favori favori) {
+    public Client(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, String imgClient, Authentification authentification) {
         super(nomUtilisateur, prenomUtilisateur, emailUtilisateur, passUtilisateur, dateCreation, role);
         this.imgClient = imgClient;
         this.authentification = authentification;
-        this.favori = favori;
     }
 
     public Client(String nomUtilisateur, String prenomUtilisateur, String emailUtilisateur, String passUtilisateur, Date dateCreation, Role role, String imgClient) {
@@ -83,22 +75,6 @@ public class Client extends Utilisateur {
 
     public void setAuthentification(Authentification authentification) {
         this.authentification = authentification;
-    }
-
-    public Favori getFavori() {
-        return favori;
-    }
-
-    public void setFavori(Favori favori) {
-        this.favori = favori;
-    }
-
-    public List<Coupon> getCoupons() {
-        return coupons;
-    }
-
-    public void setCoupons(List<Coupon> coupons) {
-        this.coupons = coupons;
     }
 
     public List<Panier> getPaniers() {

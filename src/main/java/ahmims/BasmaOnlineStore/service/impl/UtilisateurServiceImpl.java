@@ -31,21 +31,19 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private final ModelMapper modelMapper;
     private final UtilisateurValidator utilisateurValidator;
     private final RoleService roleService;
-    private final GerantEntrepotService gerantEntrepotService;
     private final UtilisateurRepository utilisateurRepository;
     private final UtilisateurDao utilisateurDao;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
     private final CompteVerificationService compteVerificationService;
 
-    public UtilisateurServiceImpl(ClientService clientService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, GerantEntrepotService gerantEntrepotService, UtilisateurRepository utilisateurRepository, UtilisateurDao utilisateurDao, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, CompteVerificationService compteVerificationService) {
+    public UtilisateurServiceImpl(ClientService clientService, AdministrateurService administrateurService, JwtManager jwtManager, ModelMapper modelMapper, UtilisateurValidator utilisateurValidator, RoleService roleService, UtilisateurRepository utilisateurRepository, UtilisateurDao utilisateurDao, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, CompteVerificationService compteVerificationService) {
         this.clientService = clientService;
         this.administrateurService = administrateurService;
         this.jwtManager = jwtManager;
         this.modelMapper = modelMapper;
         this.utilisateurValidator = utilisateurValidator;
         this.roleService = roleService;
-        this.gerantEntrepotService = gerantEntrepotService;
         this.utilisateurRepository = utilisateurRepository;
         this.utilisateurDao = utilisateurDao;
         this.authenticationManager = authenticationManager;
@@ -84,7 +82,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             if (utilisateurRepository.findTopByEmailUtilisateur(userFormData.getEmail()) != null)
                 throw new RequestException("Email already exists, choose another one", HttpStatus.BAD_REQUEST);
             Utilisateur user = null;
-            user = userFormData.getType().toLowerCase().equals("client") ? new Client(userFormData, null) : userFormData.getType().toLowerCase().equals("administrateur") ? new Administrateur(userFormData) : userFormData.getType().toLowerCase().equals("gerantentrepot") ? new GerantEntrepot(userFormData) : null;
+            user = userFormData.getType().toLowerCase().equals("client") ? new Client(userFormData, null) : userFormData.getType().toLowerCase().equals("administrateur") ? new Administrateur(userFormData) : null;
             //
             ArrayList<Validation> validations = utilisateurValidator.isValidNewObject(user);
             if (validations != null) {
@@ -135,8 +133,6 @@ public class UtilisateurServiceImpl implements UtilisateurService {
                 return clientService.save((Client) utilisateur);
             case "Administrateur":
                 return administrateurService.save((Administrateur) utilisateur);
-            case "GerantEntrepot":
-                return gerantEntrepotService.save((GerantEntrepot) utilisateur);
             default:
                 throw new RequestException("Server breakdown, unknown User", HttpStatus.BAD_REQUEST);
                 //break;

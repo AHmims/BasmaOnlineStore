@@ -32,8 +32,6 @@ public class Produit {
     private Administrateur administrateur;
     @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
     private List<ProduitPanier> paniers;
-    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
-    private List<ProduitFavori> favoris;
     @ManyToOne
     @JoinColumn(name = "idCategorie")
     private Categorie categorie;
@@ -42,7 +40,7 @@ public class Produit {
     //
     //
 
-    public Produit(String idProduit, String libelleProduit, String descriptionProduit, double prixProduit, Date dateCreation, boolean visible, Administrateur administrateur, List<ProduitPanier> paniers, List<ProduitFavori> favoris) {
+    public Produit(String idProduit, String libelleProduit, String descriptionProduit, double prixProduit, Date dateCreation, boolean visible, Administrateur administrateur, List<ProduitPanier> paniers) {
         this.idProduit = idProduit;
         this.libelleProduit = libelleProduit;
         this.descriptionProduit = descriptionProduit;
@@ -51,7 +49,6 @@ public class Produit {
         this.visible = visible;
         this.administrateur = administrateur;
         this.paniers = paniers;
-        this.favoris = favoris;
     }
 
     public Produit(String libelleProduit, String descriptionProduit, double prixProduit, Date dateCreation, boolean visible, Administrateur administrateur) {
@@ -148,14 +145,6 @@ public class Produit {
 
     public void setPaniers(List<ProduitPanier> paniers) {
         this.paniers = paniers;
-    }
-
-    public List<ProduitFavori> getFavoris() {
-        return favoris;
-    }
-
-    public void setFavoris(List<ProduitFavori> favoris) {
-        this.favoris = favoris;
     }
 
     public Categorie getCategorie() {

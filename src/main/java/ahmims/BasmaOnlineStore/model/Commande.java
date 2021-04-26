@@ -21,12 +21,6 @@ public class Commande {
     @Column(name = "statutCommande")
     private int statutCommande;
     //
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idCoupon")
-    private Coupon coupon;
-    @ManyToOne
-    @JoinColumn(name = "idGerantEntrepot")
-    private GerantEntrepot gerantEntrepot;
     @ManyToOne
     @JoinColumn(name = "idAdresse")
     private Adresse adresse;
@@ -36,20 +30,17 @@ public class Commande {
     //
     //
 
-    public Commande(String idCommande, Date dateCommande, int statutCommande, Coupon coupon, GerantEntrepot gerantEntrepot, Adresse adresse, Panier panier) {
+    public Commande(String idCommande, Date dateCommande, int statutCommande, Adresse adresse, Panier panier) {
         this.idCommande = idCommande;
         this.dateCommande = dateCommande;
         this.statutCommande = statutCommande;
-        this.coupon = coupon;
-        this.gerantEntrepot = gerantEntrepot;
         this.adresse = adresse;
         this.panier = panier;
     }
 
-    public Commande(Date dateCommande, int statutCommande, Coupon coupon, Adresse adresse, Panier panier) {
+    public Commande(Date dateCommande, int statutCommande,  Adresse adresse, Panier panier) {
         this.dateCommande = dateCommande;
         this.statutCommande = statutCommande;
-        this.coupon = coupon;
         this.adresse = adresse;
         this.panier = panier;
     }
@@ -86,22 +77,6 @@ public class Commande {
 
     public void setStatutCommande(int statutCommande) {
         this.statutCommande = statutCommande;
-    }
-
-    public Coupon getCoupon() {
-        return coupon;
-    }
-
-    public void setCoupon(Coupon coupon) {
-        this.coupon = coupon;
-    }
-
-    public GerantEntrepot getGerantEntrepot() {
-        return gerantEntrepot;
-    }
-
-    public void setGerantEntrepot(GerantEntrepot gerantEntrepot) {
-        this.gerantEntrepot = gerantEntrepot;
     }
 
     public Adresse getAdresse() {
