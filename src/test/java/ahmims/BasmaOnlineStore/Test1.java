@@ -59,5 +59,8 @@ class Test1 {
         msg.setText("Hello World \n Spring Boot Email");
 
         javaMailSender.send(msg);
+        //
+        //
+        
     }
 }

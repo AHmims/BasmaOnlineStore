@@ -36,6 +36,8 @@
       <excludeFolder url="file://$MODULE_DIR$/angularclient/dist" />
       <excludeFolder url="file://$MODULE_DIR$/angularclient/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/client/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/client/tmp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
